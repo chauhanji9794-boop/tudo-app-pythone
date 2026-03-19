@@ -1,63 +1,88 @@
-# TECH GOD - Intelligent Tech Assistant
+# HEALTH ASSISTANT APP
 
-# Function to display welcome message
-def greet():
-    print("⚡ Welcome to TECH GOD ⚡")
-    print("Type your tech question or 'exit' to quit.\n")
+# Function to calculate BMI
+def calculate_bmi(weight, height):
+    bmi = weight / (height ** 2)
+    return bmi
 
 
-# Function to process user input and return response
-def get_response(user_input):
-    # Convert input to lowercase for easy matching
-    user_input = user_input.lower()
+# Function to give BMI category
+def bmi_category(bmi):
+    if bmi < 18.5:
+        return "Underweight 😟"
+    elif 18.5 <= bmi < 24.9:
+        return "Normal weight 😊"
+    elif 25 <= bmi < 29.9:
+        return "Overweight 😐"
+    else:
+        return "Obese ⚠️"
 
-    # Conditions to check keywords
-    if "python" in user_input:
-        return "Python is used for AI, web development, automation, and more."
 
-    elif "java" in user_input:
-        return "Java is a powerful object-oriented programming language."
+# Function for health tips
+def health_tips():
+    print("\n🩺 Health Tips:")
+    print("1. Drink enough water 💧")
+    print("2. Exercise daily 🏃")
+    print("3. Eat balanced diet 🥗")
+    print("4. Sleep 7-8 hours 😴")
 
-    elif "ai" in user_input:
-        return "AI means Artificial Intelligence — machines that think like humans."
 
-    elif "html" in user_input:
-        return "HTML is used to create web pages."
+# Function for symptom checker (basic)
+def symptom_checker(symptom):
+    symptom = symptom.lower()
 
-    elif "git" in user_input:
-        return "Git tracks changes in your code."
+    if "fever" in symptom:
+        return "You may have an infection. Stay hydrated and consult a doctor."
 
-    elif "github" in user_input:
-        return "GitHub is a cloud platform to store your Git projects."
+    elif "headache" in symptom:
+        return "It could be stress or dehydration. Rest and drink water."
 
-    elif "exit" in user_input:
-        return "exit"
+    elif "cough" in symptom:
+        return "Possible cold or flu. Monitor symptoms."
 
     else:
-        return "I am still learning... ask another tech question!"
+        return "Not sure. Please consult a healthcare professional."
 
 
-# Main function to run the app
+# Main program
 def main():
-    greet()  # Call greeting function
+    print("🏥 Welcome to Health Assistant App 🏥")
 
-    # Infinite loop to keep program running
     while True:
-        # Take input from user
-        user_input = input("You: ")
+        print("\nChoose an option:")
+        print("1. Calculate BMI")
+        print("2. Health Tips")
+        print("3. Symptom Checker")
+        print("4. Exit")
 
-        # Get response from function
-        response = get_response(user_input)
+        choice = input("Enter choice (1-4): ")
 
-        # Check if user wants to exit
-        if response == "exit":
-            print("Tech God: Goodbye 👋")
+        if choice == "1":
+            weight = float(input("Enter weight (kg): "))
+            height = float(input("Enter height (meters): "))
+
+            bmi = calculate_bmi(weight, height)
+            category = bmi_category(bmi)
+
+            print(f"Your BMI is: {bmi:.2f}")
+            print(f"Category: {category}")
+
+        elif choice == "2":
+            health_tips()
+
+        elif choice == "3":
+            symptom = input("Enter your symptom: ")
+            result = symptom_checker(symptom)
+            print(result)
+
+        elif choice == "4":
+            print("Stay healthy! Goodbye 👋")
             break
 
-        # Print response
-        print("Tech God:", response)
+        else:
+            print("Invalid choice. Try again.")
 
 
-# Entry point of program
+# Run app
 if __name__ == "__main__":
     main()
